@@ -298,18 +298,17 @@ exports.SphinxClient = function() {
 				var anchorparamscount = 0;
 				query_parameters.anchor = new Array ();
 				for (var anchor_id in query.anchor) {
-					console.log ("In anchor_id");
 					var myanchor = query.anchor[anchor_id];
 					for (var anchor_subid in myanchor) {
 						query_parameters.anchor[anchor_subid] = myanchor[anchor_subid];
-						console.log (anchor_subid + "\t" + myanchor[anchor_subid]);
+						//console.log (anchor_subid + "\t" + myanchor[anchor_subid]);
 					}
 				}
 
 				for (var temp in query_parameters.anchor) {
 					anchorparamscount += 1;
 				}
-				console.log ("Anchorparamscount " + anchorparamscount);
+        //console.log ("Anchorparamscount " + anchorparamscount);
 
 
 				request.push.lstring(query.indexes); // Indexes used JEZ
@@ -350,8 +349,8 @@ exports.SphinxClient = function() {
 						request.push.int64(0, filter.max);
 						break;
 						case Sphinx.filterTypes.FLOATRANGE:
-						console.log ("Filter min: " + filter.min);
-						console.log ("Filter max: " + filter.max);
+						//console.log ("Filter min: " + filter.min);
+						//console.log ("Filter max: " + filter.max);
 						request.push.float(filter.min);
 						request.push.float(filter.max);
 						break;
@@ -373,14 +372,14 @@ exports.SphinxClient = function() {
 				request.push.lstring(query_parameters.groupdistinct); // Group distinct
 
 				if (anchorparamscount <= 0) {
-					console.log ("No anchor given"); 
+					//console.log ("No anchor given"); 
 					request.push.int32(0); // no anchor given
 				} else {
 					request.push.int32(1); // anchor point in radians
-					console.log ("Attrlat: " + query_parameters.anchor["attrlat"]);
-					console.log ("Attrlong: " + query_parameters.anchor["attrlong"]);
-					console.log ("Lat: " + query_parameters.anchor["lat"]);
-					console.log ("Long: " + query_parameters.anchor["long"]);
+					//console.log ("Attrlat: " + query_parameters.anchor["attrlat"]);
+					//console.log ("Attrlong: " + query_parameters.anchor["attrlong"]);
+					//console.log ("Lat: " + query_parameters.anchor["lat"]);
+					//console.log ("Long: " + query_parameters.anchor["long"]);
 					request.push.lstring(query_parameters.anchor["attrlat"]); // Group distinct
 					request.push.lstring(query_parameters.anchor["attrlong"]); // Group distinct
 					request.push.float(query_parameters.anchor["lat"]);
